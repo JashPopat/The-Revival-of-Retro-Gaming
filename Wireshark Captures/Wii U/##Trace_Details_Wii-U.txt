@@ -1,0 +1,82 @@
+--> Trace 1: Network Test
+
+Tracks network connections made by the Wii U to official Nintendo servers.
+This is a record of initial connection tests done by the Wii U after connecting to the Wi-Fi for the first time. 
+
+Shows how the Wii U is yet able to talk to official Nintendo servers despite the network shutdown years ago
+Helps to demonstrate the availability of Nintendo servers (as the Nintendo Network, a precursor to Nintendo Switch Online, is yet alive)
+Makes it clear that Wii U had security in mind, but in such a case cannot be shown directly as a network check doesn't need as much security as game services
+Mainly shows the original style of packet distribution back when Nintendo's Wii U servers were actively in use (and the IP addresses of the original Nintendo Servers)
+
+For further information about the original servers used by the Wii U, refer to frames 9 - 21
+
+--> Trace 2: Wii U Home Screen + Miiverse
+
+Tracks connections made by the Wii U to Nintendo servers and later on, the Pretendo Network.
+Starts requesting from the second the Wii U home screen starts loading (which is why the loading screen goes on for so long - well that and slow hardware :p )
+
+Initially requests original Wii U servers for information (frame 3-45), but due to the mod patch, requests data from Aroma (frame 50 onwards) and then Pretendo (frame 98 onwards)
+Seen using TLSv1 for queries (both official and aroma-based) but is seen using TLSv1.2 in Aroma and Juxtaposition queries
+In traces using [__.app.pretendo.cc], it connects to online functionalities whether on the home screen or otherwise, and when using [___.olv.pretendo.cc], it loads Juxtaposition data.
+The traces using the MDNS protocol show that the network is aware that the packets are passing through a 3rd part device (AKA My Laptop, also labeled as 'Hot Signals In The Area') - seen in frames like 1549
+Few retransmissions seeminly occured, either due to timeouts or change in protocols, as the second half of the trace file shows a heavy use of TLSv1.2, as this was when I sending messages and commenting on user posts
+
+--> Trace 3: Miiverse (AKA Juxtaposition)
+
+# Just to confirm, Miiverse is Nintendo's social app on the Wii U and Juxtaposition is an improved and reinstated Miiverse made by the Pretendo Team on top of Miiverse #
+
+Similar to the previous trace, this too us based on the Miiverse feature, as this is where TLSv1.2 is used, showing greater effort put into this feature in terms of security.
+Confirms my belief that the IP [___.olv.pretendo.cc] being used for Miiverse
+
+Mainly shows a slightly flawed or throttled transport network, as this along with some games, see significant timeouts and spurious retransmissions, despite there being no visible difference to the user experiece
+Follows secure methods of transmissions with TLS pipelines with a constant use of SYNs and ACKs along with key exchanges.
+
+--> Trace 4: Nintendo Land
+
+Not too relevant to the project, as this game didn't have any actual online game functionality, but used Miiverse features to display player comments and messages to the main plaza of the game, hence being supported by Pretendo
+Traces show the use of Miiverse functions coming back online in the game, as seen in frame 9, where [discovery.olv.pretendo.cc] was initiated to allow random messages from Juxtaposition's Nintendo Land groups to populate the game's plaza
+
+Nothing too special for the most part, as the blue frames showed data transfer in the form of user comments to the console (despite using UDP, it is ignored as there are comments meant for the public sent anonymously or using very little personal information)
+One thing that stood out were the sheer number of retransmissions (spurious and otherwise), timeouts and Duplicate ACKs that were observed between frames 449 - 485, casuing the TCP window to get full
+Frame 449 stood out the most, as it saw a staggering 11 Duplicate ACKs, displaying some fault in the packet transfer system and network capabilities
+
+--> Trace 5: Super Smash Brothers for Wii U
+
+First actual attempt at connecting to a Pretendo server for online multiplayer
+Tracks the process of connecting to a competitive online server, as this game requires contant dynamic updating with as less lag as possible
+
+Several attempts were made to connect to an online server, with each segment having its own connection and data transfer relating player information, chanracter chosen and stage choice.
+An ideal segment to show a continuous connection would be from frames 308-386
+Each connection is marked with Client and Server Hellos, Certificate Sharing, Key Exchanges and an Encypted handshake (which happens in almost ever other part of the network)
+During such competitive multiplayer sessions, it is important to have no disturbances and timeouts, and it can be seen clearly as no retransmissions and timeouts take place, and the data transfer is prioritised the most.
+The end of each game session is marked with a SYN-ACK and ACK, showing that the session is terminated in a safe and secure manner without any possibility of token snatching.
+
+--> Trace 6: Super Mario Maker
+
+This trace is the most informative part of the project, as it displays actual game data download + upload along with constant data transfer between the console and game servers for game level data
+The traces track segements showing the different segments needed for each part of the transfer
+
+The flow of the game traces include:
+
+1. Loading the course world (where all the different user created levels are displayed)
+- It was observed that when loading the course world, user data and level build was transfered using TLSv1 while the level metadata itself was loaded using TCP
+
+2. Loading a user created course and downloading it
+- When loading the level, several retransmissions were seen as it seems that the level might have been stored in a fragmented way, with a lot of retransmissions and Duplicate ACKs (the highest ever seen with over 75 DUP ACKs in some cases)
+
+3. Playing a level by streaming it from the server
+- When playing the level, it was understood that the level itself was downloaded onto the console using TLSv1 and played offline of actually streaming it from the server
+
+4. Leaving a 'like' on the level and following the level creator
+- When the level was completed, the user data was pulled based on the level metadata and loaded using TLSv1, and so was the like, as it contained my user data along with it
+
+5. Creating and uploading my own level to the course world for others to play
+- When uploading my own level, a similar method to the level download took place, where the level and user information was uploaded using TLSv1
+
+All these tests displayed that Pretendo went through all the measures to ensure that while game playability was their main priority, security too was a feature they took into consideration
+Most segments using TCP only used that when it was known that the information sent was not confidential while important information like player data was prioritized to use TLSv1
+Such tests show that the network struck a good balance between availability and confidentiality, as it realized the need to use TLSv1 when needed, while also using TCP when data didn't need as much security
+One thing I found strange was why every time a new segment was loaded, several timeouts and DUP ACKs were seen, more than any other game. This might suggest a greater issue at hand, maybe in the form of network server overloading or even network bottlenecking
+
+Such a game shows the ideal usage of the Pretendo Network, and how it should not be considered a direct replacement of the Nintendo Network, but instead as a passion project that has a lot left to improve in terms of stability and reliability
+

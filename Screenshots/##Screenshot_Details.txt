@@ -1,0 +1,77 @@
+Screenshot Details - [All screenshots are original and taken from my Wii U using the Screenshot Plugin with Aroma]
+
+S1 - Screen displaying the Wifi Sharing options on my MacBook
+This is the system that I used to turn my MacBook into a Wi-Fi hotspot. 
+It is not possible with a wireless to wireless (Wi'Fi to Mac Hotspot) connection, and so my phone connected to the laptop was used to provide the Mac with Mobile Data that it then propagated to its hotspot to to pass the packets through Wireshark
+
+S2 - Wii U Home Menu (Before Modding)
+See how all the comments are from Nintendo since they are the defaults comments when the new ones cannot be loaded; 
+and also the app icons, as all are default Wii U applications
+
+S3 - Wii U Home Menu (After Modding)
+All the comments have now been changed to actual comments posted on Juxtaposition (Miiverse replacement), along with app icons changing to custom game icons, some of which are 3DS games, since Pretendo also supports that system 
+If you noticed, a lot more Miis are also joining the screen from the back, indicating actual Pretendo users who have posted comments about the games shown on screen
+
+S4 - Juxtaposition (Miiverse) User Post
+A user called Pancho, whose post on the 'Homebrew Community' Chat Page was displayed on my Wii U home menu. 
+This application is what is used to mod the Wii U, and is not officially supported by Nintendo, so such a post is only possible if done by a user who has modified their console
+
+S5 - Wii U Network Test
+This is the testing mechanism that was first used to gain a better understanding of the security infrastructure used on the Wii U
+
+S6 - Super Smash Bros for Wii U Home Menu
+Once clicking on the orange Online Icon, the console would authenticate the Pretendo Network's server availability and connect
+
+S7 - Online Matchmaking in Smash Bros via Pretendo
+This is the waiting page that is used to match players willing to play online (now with the Pretendo Network)
+It is only possible to get to this screen after the Wii U has successfully connected to an online server
+
+S8 - Pretendo User's Profile in Nintendo Land
+A Pretendo user who signed up to share their information has their Mii transported to my game's plaza, where their post on Juxtaposition (Miiverse) is displayed along with their trophies and accomplishments from the game
+
+S9 - Nintendo Land Plaza with online users
+The Nintendo Land Plaza now contains Mii's of players that use Pretendo, with each of them having their own statistics and posts
+This also shows in-game features like users with the most stamps, most money and most prizes, something that would not be possible without Pretendo in today's day
+
+S10 - Super Mario Maker Course World
+Super Mario Maker is practically an online-only game, with the entire point of it being the ability to play levels made by users around the world.
+After the shutdown of the Wii U's official servers, this game would be impossible to play, but with Pretendo, users can now freely download and upload content to the course world once again!
+All original functionality, including course name, course ID, maker and clear rate, along with a lot more have been completely preserved and displayed
+
+S11 - User Created level in Super Mario Maker
+This sub-menu allows the user to play the level show on screen, which was uploaded onto Pretendo's servers by a modded user.
+This menu, under Pretendo, still maintains the original functionality, like creator names and clear rates (plus world records too!)
+The course ID, by which this course can be discovered by anyone using Pretendo, is also uniquely generated compared to how Nintendo did it, but still works in the exact same way.
+
+S12 - Playing a user created course in Super Mario Maker
+This was an example course that was played to test out the kind of packets that would get sent during gameplay and the kind of functionality and lag that might occur
+
+S13 - Course Conclusion Page
+The course once completed, shows this page where you can like and view data and course information
+
+S14 - Warning sign detailing what gets uploaded and rules followed
+This warning before posting the course, helps to gain insights into what kind of sensitive information gets shared and what protocols the service uses when sending such data.
+More sensitive information might lead to higher security, but things can also be the other way round
+
+S15 - Course ID upon upload
+When testing, I had also uploaded one of my own courses, which successful went online, generating this code, if you come across Pretendo sometime soon, check this out, as this course helped in proving the efficacy of this online service replacement
+
+S16 - vWii DNS Modification for Wiimmfi
+To access Wiimmfi, there are two main ways of doing it, you can download a DNS adjustor to shift your Wii to Wiimmfi every time it boots, or you can just simply change the DNS from the Internet settings of the Wii and you'll be good to go. 
+For testing purposes, I tried out both methods but the second one turned out to be far easier. 
+The custom DNS has not be shown here as I do not wish to promote methods like this especially for the reasons I pointed out in the report
+
+S17 - The Homebrew Channel Menu
+This is the internal Homebrew Channel Menu, where you can browse all extensions download onto the console, beyond which you can use any of them to perform certain functions
+
+S18 - Successful connection to Wiimmfi on Super Smash Bros Brawl (Wii)
+In game, it is only possible to enter online matches if the Wii has successfully connected to an online server. 
+This message, only shown after a series of "Connecting to Nintendo WFC" messages, signifies that there was a successful connection between the game and Wiimmfi
+
+S19 - Online Matchmaking in Smash Bros via Wiimmfi
+This is the waiting page that is used to match players willing to play online (now with Wiimmfi)
+It is only possible to get to this screen after the Wii has successfully connected to an online server. 
+
+S20 - Wireshark Trace of the online matchmaking segment of Super Smash Bros Brawl (Wii)
+The frames from this exact segment of the game helped in determining how weak the security of Wiimmfi is, and how my own information, when being sent over, was so easily decodable to the level that showed me all sorts of information that I would have otherwise like to have stayed hidden. Encoded in Base64, this data got decrypted in a matter of milliseconds using code that took me 5 minutes to write.
+In the decrypted message were passwords, token IDs, region and personal identification that would help pinpoint and hicjack my session and other personal information!

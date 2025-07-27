@@ -1,0 +1,26 @@
+--> Trace 1: Wii Shop Channel (Official)
+
+Tracks network connections with real Nintendo servers. 
+The Wii Shop Channel is the only active service that Nintendo provides for the Wii despite all other online services shutting years ago, albeit with limited functionality.
+
+Mainly tracks access to Nintendo's servers and the download of an application for the Wii (dubbed as 'The Legend of Zelda: Skyward Sword Save Data Update Channel').
+Shows how official means took security a bit more seriously while also prioritizing stability and availability (Barely any retransmissions and protocol changes)
+Used TLSv1 and SSLv2, which was seemingly absent in most of Wiimmfi's transmissions, showing how it wasn't aging hardware but lacking software that was the issue in Wiimmfi's server connections.
+Due to a higher level of security, despite multiple tries, I could not access any personal information and data regarding the Wii, servers or software being downloaded from any of the traces.
+
+For self digging about the software being downloaded as shown in the traces, look at frame 2075 and beyond
+
+
+--> Trace 2: Wii Menu + Super Smash Brothers Brawl
+
+Tracks the network connections of the vWii (virtual Wii) with the Wiimmfi servers
+Tested on the Wii Menu and Super Smash Bros. Brawl (Wii). 
+This was the only Wifi enabled game I had for the Wii (no Mariokart at the moment sadly), so only one game test could be conducted for this section of the research.
+
+Shows how the Wii isn't able to connect to some official servers anymore based on frames 23 to 30
+You can see Wiimmfi servers being accessed by the console from as early as frame 60, which was exactly when Smash Bros. was loaded into the console.
+This shows that the console prepared itself for online capabilities to ensure a smoothr connection. This was confirmed when it successfully connected to Wiimmfi servers even before I accessed the online capabilities.
+There is an instant switch in message protocols as the official messages aren't being used anymore. A shift can be seen from TLSv1 to HTTP in many cases post frame 60.
+At the end, after several failed attempts to connect with users online (most likely due to a diminishing user base and not network issues), I quit the game.
+After quitting the game, Wiimmfi's unprotected messages saw a few timeouts and the Wii went back to using official protols to communicate, as seen in the frames 635 and beyond
+
